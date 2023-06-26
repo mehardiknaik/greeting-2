@@ -15,8 +15,9 @@ const HomeComponent = () => {
   const submit = (e) => {
     e.preventDefault();
     // const { value } = ref.current;
+    const emoji = encode(e.target?.emoji?.value || "❤");
     const path = inputs.map((x) => encode(e.target?.[x].value)).join("/");
-    router.push(`/${path}`);
+    router.push(`/${emoji}/${path}`);
   };
 
   return (
@@ -28,9 +29,15 @@ const HomeComponent = () => {
           type="text"
           name={x}
           placeholder={x}
-          className="px-3 py-3 my-2 placeholder-slate-300 text-purple-800 relative  rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+          className="px-3 py-3 my-2 placeholder-grey-700 rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full bg-[#ffffff3b]"
         />
       ))}
+      <input
+        type="text"
+        name={"emoji"}
+        placeholder={"Emoji"}
+        className="px-3 py-3 my-2 placeholder-grey-700  relative  rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full bg-[#ffffff3b]"
+      />
       <div className="flex gap-2">
         <button
           type="button"

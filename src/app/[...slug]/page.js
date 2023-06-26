@@ -3,18 +3,20 @@ import Particle from "@/components/Particle";
 import { decode } from "@/util/enc";
 
 export async function generateMetadata({ params: { slug, type } }) {
-  const title = slug.map((x) => decode(x)).join(" ");
+  const [emoji, ...rest] = slug;
+  const title = rest.map((x) => decode(x)).join(" ");
   return {
     title,
-    description: title,
+    description: `${title} from hardik`,
   };
 }
 
 export default function Page({ params: { slug } }) {
+  const [emoji, ...rest] = slug;
   return (
-    <main className="h-screen">
-      <Particle />
-      <Name slug={slug} />
+    <main className="h-screen overflow-hidden">
+      <Particle emoji={decode(emoji)} />
+      <Name slug={rest} />
     </main>
   );
 }
